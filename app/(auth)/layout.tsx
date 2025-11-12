@@ -11,7 +11,7 @@ export default function AuthLayout({
         {/* Header */}
         <div className="text-center pt-12 pb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Errand Management System
+            Taskflow Errand Management System
           </h1>
           <p className="text-gray-600">
             Streamline your service requests with ease

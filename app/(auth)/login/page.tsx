@@ -71,8 +71,6 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center px-4 min-h-screen">
       <div className="bg-white rounded-md p-8 md:p-20 flex flex-col max-w-md w-full shadow-lg">
-        {/* Sonner toast will automatically render at the root level */}
-
         <div className="flex items-center justify-center bg-blue-400 p-4 rounded-full w-16 h-16 mx-auto">
           <User size={30} className="text-white" />
         </div>

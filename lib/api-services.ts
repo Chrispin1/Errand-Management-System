@@ -13,9 +13,9 @@ export const loginUser = async (data: LoginSchema) => {
   }
 
   const result = await response.json()
-  
-  if (result.token || result.access_token) {
-    const authToken = result.token || result.access_token
+  console.log(result)
+  if (result.refresh || result.access) {
+    const authToken = result.access
     localStorage.setItem("authToken", authToken)
     // Force synchronous storage
     await new Promise(resolve => setTimeout(resolve, 0))
@@ -44,12 +44,13 @@ export const logoutUser = async () => {
     });
 
     localStorage.removeItem("authToken");
+
     
     if (!response.ok) {
       const error = await response.json();
       console.error("Logout API error:", error);
     }
-
+    
     return { success: true };
   } catch (error) {
     localStorage.removeItem("authToken");
@@ -57,3 +58,4 @@ export const logoutUser = async () => {
     return { success: true }; 
   }
 }
+

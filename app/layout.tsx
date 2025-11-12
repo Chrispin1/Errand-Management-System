@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "./QueryProvider";
+import { ToastContainer } from "react-toastify";
 
 const jost = Jost({
   variable: "--font-geist-sans",
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${jost.className} antialiased`}>
         <QueryProvider>{children}</QueryProvider>
+        <ToastContainer />
       </body>
     </html>
   );

@@ -32,23 +32,22 @@ export default function Register() {
         });
 
         console.log(res);
+        // store user in session storage
+        sessionStorage.setItem("user_id", JSON.stringify(res.id));
         toast.success("Account created successfully!", {
           position: "top-right",
         });
 
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/login");
         }, 3000);
       } catch (error: any) {
         console.error(error);
 
-        // Parse the error response
         if (error.message) {
           try {
-            // Try to parse JSON error message
             const errorData = JSON.parse(error.message);
 
-            // Display each error field
             Object.entries(errorData).forEach(([field, messages]) => {
               if (Array.isArray(messages)) {
                 messages.forEach((message: string) => {
