@@ -2,12 +2,12 @@
 import { registerUser } from "@/actions/auth";
 import { User } from "lucide-react";
 import Link from "next/link";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState, useTransition } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "sonner";
 
 export default function Register() {
+  const router = useRouter();
   const [form, setForm] = useState({
     first_name: "",
     last_name: "",
@@ -34,10 +34,11 @@ export default function Register() {
         console.log(res);
         toast.success("Account created successfully!", {
           position: "top-right",
-          autoClose: 3000,
         });
 
-        router.push("/dashboard");
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 3000);
       } catch (error: any) {
         console.error(error);
 
@@ -53,7 +54,6 @@ export default function Register() {
                 messages.forEach((message: string) => {
                   toast.error(message, {
                     position: "top-right",
-                    autoClose: 5000,
                   });
                 });
               }
@@ -64,14 +64,12 @@ export default function Register() {
               error.message || "Registration failed. Please try again.",
               {
                 position: "top-right",
-                autoClose: 5000,
               }
             );
           }
         } else {
           toast.error("Registration failed. Please try again.", {
             position: "top-right",
-            autoClose: 5000,
           });
         }
       }
@@ -80,7 +78,6 @@ export default function Register() {
 
   return (
     <>
-      <ToastContainer />
       <div className="flex items-center justify-center px-4 min-h-screen">
         <div className="bg-white rounded-md p-8 md:p-20 flex flex-col max-w-xl w-full shadow-lg">
           <div className="flex items-center justify-center bg-blue-400 p-4 rounded-full w-16 h-16 mx-auto">

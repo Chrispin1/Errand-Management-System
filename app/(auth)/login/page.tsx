@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/lib/api-services";
+import { toast } from "sonner";
 
 export default function Login() {
   const router = useRouter();
@@ -30,13 +31,17 @@ export default function Login() {
     setIsLoading(true);
 
     if (!formData.email || !formData.password) {
-      setError("Please fill in all fields");
+      const errorMsg = "Please fill in all fields";
+      setError(errorMsg);
+      toast.error(errorMsg);
       setIsLoading(false);
       return;
     }
 
     if (!formData.email.includes("@")) {
-      setError("Please enter a valid email address");
+      const errorMsg = "Please enter a valid email address";
+      setError(errorMsg);
+      toast.error(errorMsg);
       setIsLoading(false);
       return;
     }
@@ -48,11 +53,16 @@ export default function Login() {
         localStorage.setItem("authToken", response.token);
       }
 
-      router.push("/dashboard");
+      toast.success("Login successful! Redirecting...");
+
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Login failed. Please try again."
-      );
+      const errorMessage =
+        err instanceof Error ? err.message : "Login failed. Please try again.";
+      setError(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -61,6 +71,8 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center px-4 min-h-screen">
       <div className="bg-white rounded-md p-8 md:p-20 flex flex-col max-w-md w-full shadow-lg">
+        {/* Sonner toast will automatically render at the root level */}
+
         <div className="flex items-center justify-center bg-blue-400 p-4 rounded-full w-16 h-16 mx-auto">
           <User size={30} className="text-white" />
         </div>
@@ -121,7 +133,7 @@ export default function Login() {
         </form>
 
         <p className="pt-4 text-center text-sm">
-          Don&apos;t have an account?{" "}
+          Dont have an account?{" "}
           <Link
             href="/register"
             className="underline text-blue-500 font-medium hover:text-blue-600"

@@ -1,4 +1,4 @@
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "sonner";
 
 export default function AuthLayout({
   children,
@@ -18,9 +18,9 @@ export default function AuthLayout({
           </p>
         </div>
 
-        <div className="pb-12">
-          <ToastContainer />
+        <div className="">
           {children}
+          <Toaster position="top-right" expand={false} richColors />
         </div>
 
         <div className="text-center pb-8">
