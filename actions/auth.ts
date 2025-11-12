@@ -5,7 +5,7 @@ import { IRegisterReq, IRegisterRes } from '../data-types/auth';
 export async function registerUser(regData:IRegisterReq): Promise<IRegisterRes>{
   try {
 
-    const res = await fetch(`${process.env.API_BASE_URL}/accounts/register`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/accounts/register`, {
         method: "POST",
         headers: {
             "Content-Type":"application/json"
