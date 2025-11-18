@@ -1,4 +1,3 @@
-// create schema for reg and login forms
 import { z } from "zod"
 
 export const registerSchema = z.object({
